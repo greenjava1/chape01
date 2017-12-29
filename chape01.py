@@ -12,6 +12,8 @@ y += gamma.rvs(15, loc=0, scale=100, size=len(x))  # 产生gamma分布
 y += 2 * sp.exp(x / 100.0)
 y = sp.ma.array(y, mask=[y < 0])  ###此处使用了掩码数组 mask，
 print(sum(y), sum(y < 0))
+y = [ int(i) for i in y ]
+
 
 plt.scatter(x, y)
 plt.title("Web traffic over the last month")
