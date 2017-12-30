@@ -1,3 +1,4 @@
+#coding:utf-8
 import os
 import scipy as sp
 import matplotlib.pyplot as plt
@@ -58,10 +59,15 @@ fp1, res, rank, sv, rcond = sp.polyfit(x, y, 1, full=True)
 print("Model parameters: %s" % fp1)
 print("Error of the model:", res)
 f1 = sp.poly1d(fp1)
+print (f1)
 f2 = sp.poly1d(sp.polyfit(x, y, 2))  ##ploy1d 多项式拟合函数
+print (f2)
 f3 = sp.poly1d(sp.polyfit(x, y, 3))
+print (f3)
 f10 = sp.poly1d(sp.polyfit(x, y, 10))
+print (f10)
 f100 = sp.poly1d(sp.polyfit(x, y, 100))
+print (f100)
 
 plot_models(x, y, [f1], os.path.join("..", "1400_01_02.png"))
 plot_models(x, y, [f1, f2], os.path.join("..", "1400_01_03.png"))

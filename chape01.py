@@ -1,3 +1,4 @@
+#coding:utf-8
 import os
 import scipy as sp
 from scipy.stats import gamma
