@@ -689,17 +689,17 @@ km = KMeans(n_clusters=num_clusters, init='k-means++', n_init=1,
 
 clustered = km.fit(vectorized)
 
-from sklearn import metrics  # 许多评估函数在此包中
+    from sklearn import metrics  # 许多评估函数在此包中
 
-print("Homogeneity: %0.3f" % metrics.homogeneity_score(labels, km.labels_))
-print("Completeness: %0.3f" % metrics.completeness_score(labels, km.labels_))
-print("V-measure: %0.3f" % metrics.v_measure_score(labels, km.labels_))
-print("Adjusted Rand Index: %0.3f" %
-      metrics.adjusted_rand_score(labels, km.labels_))
-print("Adjusted Mutual Information: %0.3f" %
-      metrics.adjusted_mutual_info_score(labels, km.labels_))
-print(("Silhouette Coefficient: %0.3f" %
-       metrics.silhouette_score(vectorized, labels, sample_size=1000)))
+    print("Homogeneity: %0.3f" % metrics.homogeneity_score(labels, km.labels_))
+    print("Completeness: %0.3f" % metrics.completeness_score(labels, km.labels_))
+    print("V-measure: %0.3f" % metrics.v_measure_score(labels, km.labels_))
+    print("Adjusted Rand Index: %0.3f" %
+          metrics.adjusted_rand_score(labels, km.labels_))
+    print("Adjusted Mutual Information: %0.3f" %
+          metrics.adjusted_mutual_info_score(labels, km.labels_))
+    print(("Silhouette Coefficient: %0.3f" %
+           metrics.silhouette_score(vectorized, labels, sample_size=1000)))
 
 new_post_vec = vectorizer.transform([new_post])
 new_post_label = km.predict(new_post_vec)[0]
