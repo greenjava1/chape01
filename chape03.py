@@ -3,13 +3,38 @@ import os
 import sys
 
 import scipy as sp
-
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
-vectorizer = CountVectorizer(min_df=1,stop_words='english')
+
+
+
+import nltk.stem
+#词干处理1
+english_stemmer = nltk.stem.SnowballStemmer('english')
+class StemmedCountVectorizer(CountVectorizer):
+    def build_analyzer(self):
+        analyzer = super(StemmedCountVectorizer, self).build_analyzer()
+        return lambda doc: (english_stemmer.stem(w) for w in analyzer(doc))
+
+
+class StemmedTfidfVectorizer(TfidfVectorizer):
+    def build_analyzer(self):
+        analyzer = super(StemmedTfidfVectorizer, self).build_analyzer()
+        return lambda doc: (english_stemmer.stem(w) for w in analyzer(doc))
+
+vectorizer = StemmedTfidfVectorizer(min_df=1, stop_words='english')
+#词干处理2
+#vectorizer = CountVectorizer(min_df=1,stop_words='english')
+#vectorizer = CountVectorizer(min_df=1)
+
+
+
+
+
 DIR = r"../data/toy"
 print(os.listdir(DIR))
 posts = [open(os.path.join(DIR, f)).read() for f in os.listdir(DIR)]  # 注意，os.listdir, 读取文档
-print(posts)
+print(posts )
 
 
 #print (vectorizer)
@@ -27,6 +52,7 @@ print (num_samples,num_features)
 
 new_post = "imaging databases"
 new_post_vec = vectorizer.transform([new_post])
+print (vectorizer.get_feature_names())
 #print(new_post_vec)
 #print(new_post_vec.toarray())
 
@@ -34,9 +60,9 @@ import scipy as sp
 def dist_raw(v1,v2):
 
     delta = v1-v2
-    print(v1.toarray())
-    print('==================')
-    print(v2.toarray())
+    #print(v1.toarray())
+    #print('==================')
+    #print(v2.toarray())
     return sp.linalg.norm(delta.toarray())
 
 def dist_norm(v1,v2):
