@@ -40,8 +40,12 @@ y = boston.target
 
 # Fitting a model is trivial: call the ``fit`` method in LinearRegression:
 lr = LinearRegression()
+
 print(type(x))
 lr.fit(x, y)
+print(lr.coef_)
+print(lr.intercept_)
+
 
 # The instance member `residues_` contains the sum of the squared residues
 rmse = np.sqrt(lr._residues/len(x))
@@ -49,7 +53,8 @@ print('RMSE: {}'.format(rmse))
 
 fig, ax = plt.subplots()
 # Plot a diagonal (for reference):
-ax.plot([0, 50], [0, 50], '-', color=(.9,.3,.3), lw=4)
+#ax.plot([0, 50], [0, 50], '-', color=(.9,.3,.3), lw=2)
+ax.plot([0, 50], [0, 50], '-', color=(.9,.3,.3), lw=2)
 
 # Plot the prediction versus real:
 ax.scatter(lr.predict(x), boston.target)
