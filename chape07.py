@@ -35,15 +35,17 @@ from matplotlib import pyplot as plt
 
 boston = load_boston()
 x = boston.data
+
 y = boston.target
 
 # Fitting a model is trivial: call the ``fit`` method in LinearRegression:
 lr = LinearRegression()
+print(type(x))
 lr.fit(x, y)
 
 # The instance member `residues_` contains the sum of the squared residues
-#rmse = np.sqrt(lr.residues_/len(x))
-#print('RMSE: {}'.format(rmse))
+rmse = np.sqrt(lr._residues/len(x))
+print('RMSE: {}'.format(rmse))
 
 fig, ax = plt.subplots()
 # Plot a diagonal (for reference):

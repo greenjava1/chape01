@@ -13,8 +13,15 @@ import pylab as plt
 
 boston = load_boston()
 
-x = np.array([np.concatenate((v, [1])) for v in boston.data])
-x = boston.data[:,3:5]
+
+x = boston.data[:,5]
+
+x = boston.data
+
+#x = np.array([[v] for v in x])
+#x = np.array([[v,1] for v in x])
+x = np.array([np.concatenate((v,[1]))  for v in boston.data])
+
 y = boston.target
 
 # np.linal.lstsq implements least-squares linear regression
